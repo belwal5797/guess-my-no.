@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY LUCK :</title>
+    <style>
+      
+        #g{
+            text-align: center;
+            color: blueviolet;
+            font-size: xx-large;
+        }
+        .a{
+            margin-left: 45%;
+            width: 150px;
+            height: 80px;
+           border: 4px solid black;
+            font-size: xx-large;
+            text-align: center;
+            padding-top: 2%;
+           
+            
+        }
+        #b{
+            width:25%;
+            height:100px;
+            text-align: center;
+            font-size:xx-large;
+        }
+        .score{
+            margin-left: 75%;
+            margin-top:1%;
+            font-size: xx-large
+            
+        }
+        .hscore{
+            margin-left: 75%;
+            margin-top: 2%;
+            font-size: xx-large
+        }
+        .result{
+            margin-left: 4%;
+            margin-top: 1%;
+            height: 50px;
+            border-radius:8px;
+            font-size: xx-large;
+           
+        }
+         
+        #c{
+            width:17%;
+            height:100px;
+            text-align: center;
+            font-size:xx-large;
+        }
+        .q{
+           margin-top: 5% ;
+           margin-left: 2%;
+        }
+        #info{
+        margin-left: 62%;
+        font-size:x-large;
+         
+        
+        }
+        #n{
+            margin-left: 75%;
+            
+        }
+        #again{
+            height: 50px;
+            border-radius:8px;
+            font-size: xx-large;
+        }
+      
+    </style>
+
+</head>
+<body>
+    <button id="again">PLAY AGAIN 😜😜</button>
+    <h1 id="g">GUESS MY NO :</h1>
+    <h2 id="n">(Between 1 - 30)</h2>
+
+
+    <div class="a">
+         ?
+    </div>
+
+    <div class="q">
+        <input type="number" id="c" autocomplete="off" max="30" min="1">
+    </div>
+
+    <button class="result">CHECK 🔑</button>
+
+    <span id="info">Start Guessing 😎😎!!!</span>
+
+    <div class="score">
+        🎁YOURS SCORE:<span id="ys"></span>
+    </div>
+
+    <div class="hscore">
+        🎈HIGH SCORE:<span id="hs"></span>
+    </div>
+    
+    <script>
+        let score=30,highScore=0;
+        document.querySelector('#ys').innerHTML=score;
+
+     let secretNo=Math.trunc((Math.random()*30)+1);
+     
+     document.querySelector('.result').addEventListener('click',function(){
+         let userInput=document.querySelector('#c').value;
+
+     //when user does not enter the value...
+       if(!userInput){        
+       document.querySelector('#info').innerHTML="⛔⛔PLEASE ENTER A NO";
+       }
+
+    //when user enter correct guess...
+       else if(userInput==secretNo){
+       document.querySelector('#info').innerHTML="🎉🎉CORRECT ANSWER ...";
+       document.querySelector('.a').innerHTML=secretNo;
+       document.querySelector('body').style.backgroundColor="green";
+       document.querySelector('.a').style.backgroundColor="yellow";
+
+       if(score>highScore){
+               highScore=score;
+               document.querySelector('#hs').innerHTML=highScore;
+           }
+
+       }
+
+    //when user wrong assumptions...
+       else if(userInput>secretNo){
+           if(score>1){
+        document.querySelector('#info').innerHTML="⬆⬆ TOO HIGH !!!"; 
+        score--;
+        document.querySelector('#ys').innerHTML=score;
+           }
+           else{
+            document.querySelector('#info').innerHTML="💥💥GAME OVER !!!"; 
+            document.querySelector('#ys').innerHTML=0;
+            document.querySelector('body').style.backgroundColor="red";
+    
+
+
+           }
+
+       }
+       else if(userInput<secretNo){
+         if(score>1){
+         document.querySelector('#info').innerHTML="⬆⬆ TOO LOW !!!"; 
+         score--;
+         document.querySelector('#ys').innerHTML=score;
+           }
+           else{
+            document.querySelector('#info').innerHTML="💥💥GAME OVER !!!"; 
+            document.querySelector('#ys').innerHTML=0;
+            document.querySelector('body').style.backgroundColor="red";
+            
+
+           }
+       
+        }
+
+     })
+     //Reset all info...
+     document.querySelector('#again').addEventListener('click',function(){
+        score=30;
+        secretNo=Math.trunc((Math.random()*30)+1)
+        document.querySelector('#ys').innerHTML=score;
+        document.querySelector('#info').innerHTML="Start Guessing 😎😎!!!";
+        document.querySelector('#c').value='';
+        document.querySelector('.a').style.backgroundColor="white";
+        document.querySelector('body').style.backgroundColor="white";
+        document.querySelector('.a').innerHTML="?";
+        
+     })
+
+
+    </script>
+
+</body>
+</html>
